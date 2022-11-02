@@ -1,0 +1,22 @@
+{
+  "exclude": ["node_modules"],
+  // 컴파일러 옵션 설정 해주기
+  "compilerOptions": {
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ES6",
+    "removeComments": true,
+    "lib": ["ES6"],
+    "allowJs": true,
+    "typeRoots": ["./node_modules/types", "./@types"],
+    "baseUrl": ".",
+    "paths": {
+      // core안에 전체 파일까지 @core/*이 경로를 쓰면 우리가 설정한 경로를 자동으로 잡아준다
+      "@core/*": ["src/core/*"],
+      "*": ["@types/*"]
+    }
+  }
+}

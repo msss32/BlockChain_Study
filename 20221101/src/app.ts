@@ -41,7 +41,7 @@ const tuple: [string, number, boolean?] = ["안녕", 100];
 // any : 타입 제한X TypeScript의 검사를 비활성화
 //       any는 말 그대로 아무 타입이나 될 수 있다는 뜻(필요한 곳에서만)
 
-// undiefined: undefined의 값만 가질 수 있음
+// undefined: undefined의 값만 가질 수 있음
 
 const any: any = ["안녕", 100, true];
 
@@ -52,14 +52,14 @@ const any: any = ["안녕", 100, true];
 // 이것이 any와의 차이점
 
 // 오류코드
-// const numUnknown: unknown = "100";
-// console.log(numUnknown.length);
+const numUnknown: unknown = "100";
+console.log(typeof numUnknown);
 
 // 정상코드
-// const numUnknown: unknown = "100";
-// if (typeof numUnknown === "string") {
-//   console.log(numUnknown.length);
-// }
+const numUnknown1: unknown = "100";
+if (typeof numUnknown1 === "string") {
+  console.log(numUnknown1.length);
+}
 
 // void : 비어있음을 의미 TypeScript에서 함수를 정의할 때 매개변수의 타입과
 // return 값의 타입을 지정해주는 return 값이 없는 함수는 void 타입을 사용하고 있음
