@@ -45,7 +45,7 @@ export class Block extends BlockHeader implements IBlock {
   public static isValidNewBlock(
     _newBlock: Block,
     _previousBlock: Block
-  ): failable<Block, string> {
+  ): Failable<Block, string> {
     // 블록의 높이가 이전 블록보다 1이 증가된 상태인지 체크하는 식
     if (_previousBlock.height + 1 !== _newBlock.height)
       return { isError: true, value: "블록 높이 오류" };

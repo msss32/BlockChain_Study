@@ -1,7 +1,7 @@
 // typeScript 제네릭
 declare type Result<R> = { isError: false; value: R };
-declare type faillure<E> = { isError: true; value: E };
-declare type failable<R, E> = Result<R> | faillure<E>;
+declare type Faillure<E> = { isError: true; value: E };
+declare type Failable<R, E> = Result<R> | Faillure<E>;
 // 선언 시점이 아니라 생성시점에 타입을 명시해서 하나의 타입이 아닌 다양한 타입을 사용할 수 있는 기법이다.
 
 // 사용하는 이유
