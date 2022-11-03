@@ -12,8 +12,8 @@ describe("Chain 테스트", () => {
     console.log(node.getLatestBlock());
   });
   it("체인 블록 추가 함수 테스트", () => {
-    for (let i = 0; i < 10; i++) {
-      node.addBlock([`블록${i}번째`]);
+    for (let i = 0; i < 250; i++) {
+      node.addBlock([`블록 ${i}번째`]);
     }
     console.log(node.getChain());
   });
