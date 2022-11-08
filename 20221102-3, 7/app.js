@@ -110,3 +110,21 @@
 // 블록 한개가 생성되는 예상 시간을 10분으로 설정, 10개의 블록을 한 묶음으로 해서
 // 블록 한 묶음이 생성되는 예상 시간을 6000초 할당, 이후 10개의 블록이 생성되는 걸리는 시간
 // timeExpected / 2 보다 작을 경우 난이도 조절을 1 증가시키고 timeExpected * 2 보다 클 경우에는 난이도를 1 감소
+
+// P2P 네트워크
+
+// block 클래스랑 chain을 가지고
+// P2P네트워크 http / ws 환경구성
+
+// P2P 네트워크를 만드는데 http와 ws 웹소켓을 사용해서 API들을 구성하고
+// 블록을 가져올 express모듈로 서버 동작을 하고
+// P2P 네트워크를 웹소켓으로 구성
+
+// 설치할 모듈
+// express, express-type
+// npm i express
+// npm i -D @types/express
+
+// ws 웹소켓
+// npm i ws
+// npm i -D @types/ws
