@@ -14,13 +14,13 @@
     "typeRoots": ["./node_modules/@types", "./@types"],
     "baseUrl": ".",
     "paths": {
-      // core안에 전체 파일까지 @core/*이 경로를 쓰면 우리가 설정한 경로를 자동으로 잡아준다
+      // core안에 전체 파일까지 @core/* 이 경로를 쓰면 우리가 설정한 경로로 자동으로 잡아준다.
       "@core/*": ["src/core/*"],
       "*": ["@types/*"]
     }
   },
   "ts-node": {
-    "files": true, // 전역에 d.ts 파일 사용할 수 있게
+    "files": true,
     "require": ["tsconfig-paths/register"]
   }
 }
