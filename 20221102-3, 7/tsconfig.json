@@ -1,26 +1,25 @@
 {
-  "exclude": ["node_modules"],
-  // 컴파일러 옵션 설정 해주기
-  "compilerOptions": {
-    "outDir": "./build/",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true,
-    "target": "ES6",
-    "removeComments": true,
-    "lib": ["ES6"],
-    "allowJs": true,
-    "typeRoots": ["./node_modules/@types", "./@types"],
-    "baseUrl": ".",
-    "paths": {
-      // core안에 전체 파일까지 @core/* 이 경로를 쓰면 우리가 설정한 경로로 자동으로 잡아준다.
-      "@core/*": ["src/core/*"],
-      "*": ["@types/*"]
-    }
-  },
-  "ts-node": {
-    "files": true,
-    "require": ["tsconfig-paths/register"]
+ "exclude": ["node_modules"],
+ "compilerOptions": {
+  "outDir": "./bulid/",
+  "esModuleInterop": true,
+  "moduleResolution": "node",
+  "resolveJsonModule": true,
+  "strict": true,
+  "target": "ES6",
+  "removeComments": true,
+  "lib": ["ES6"],
+  "allowJs": true,
+  "typeRoots": ["./node_modules/@types","./@types"],
+  "baseUrl": ".",
+  "paths": {
+    // @core/ 경로를 쓰면 src/core/ 경로의 모든 파일
+    "@core/*": ["src/core/*"],
+    "*":["@types/*"]
   }
+ },
+ "ts-node" : {
+   "files" : true, // 전역에 d.ts 파일 사용할수 있게
+   "require" :["tsconfig-paths/register"]
+ }
 }

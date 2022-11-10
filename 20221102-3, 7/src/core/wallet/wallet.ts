@@ -1,57 +1,55 @@
-// 지갑 클래스
-
-import { randomBytes } from "crypto";
 import elliptic from "elliptic";
 import { SHA256 } from "crypto-js";
-import fs from "fs";
-import path from "path";
-import { hrtime } from "process";
-
-// __dirname : 지금 폴더
-const dir = path.join(__dirname, "../data");
 
 // elliptic 인스턴스 생성
 const ec = new elliptic.ec("secp256k1");
 
+export interface ReceivedTx {
+    sender: string;
+    received : string;
+    amount : number;
+    signature : elliptic.ec.Signature;
+}
+
 export class Wallet {
-  public account: string;
-  public privateKey: string;
-  public publicKey: string;
-  public balance: number;
+    public account : string;
+    public publicKey : string;
+    public balance : number;
+    public signature :elliptic.ec.Signature;
 
-  constructor(privateKey: string = "") {
-    this.privateKey = privateKey || this.getPrivateKey();
-    this.publicKey = this.getPublicKey();
-    this.account = this.getAccount();
-    this.balance = 0;
-    // fs 모듈을 사용해서 프로그램을 통해 지갑을 만들때 개인키를 안정하게 저장하는게 중요함
-    // 그래서 루트 폴더에 data폴더를 만들어 준 후
-    // createWallet 함수를 사용할 때마다 data폴더에
-    // 계정명과 파일명을 가지고 privateKey 값의 내용을 파일로 생성해줌
-    Wallet.createWallet(this);
-  }
+    constructor(sender:string, signature : elliptic.ec.Signature){
+        this.publicKey = sender;
+        this.account = this.getAccount();
+        this.signature = signature;
+        this.balance = 0;
+    }
 
-  static createWallet(myWallet: Wallet) {
-    // fs모듈을 이용해서 개인키를 저장할 파일 만들기
-    // writeFileSync함수의 매개변수 첫번째 파일 이름 두번째 파일 내용
-    const filename = path.join(dir, myWallet.account);
-    const filecontent = myWallet.privateKey;
-    fs.writeFileSync(filename, filecontent);
-  }
+    static sendTransaction(receivedTx : ReceivedTx){
+        // 서명 검증
 
-  public getPrivateKey(): string {
-    return randomBytes(32).toString("hex");
-  }
+        // 공개키, 보내는 사람: 공개키, 받는사람 : 계정, 보낼 금액
+        const verify = Wallet.getVerify(receivedTx);
+        if(verify.isError) throw new Error(verify.value);
+        // 보내는 사람의 지갑 정보를 최신화
+        // 현재 가지고 있는 정보 공개키, 실제 트랜젝션에 넣을 정보는 account 정보
+        const myWallet = new this(receivedTx.sender, receivedTx.signature);
+        console.log(myWallet);
+    }
 
-  public getPublicKey(): string {
-    // 개인키를 공개키로
-    // 현재 개인키의 type은 문자열이고
-    // elliptic으로 해석을 가능하게 변환 작업
-    const keyPair = ec.keyFromPrivate(this.privateKey);
-    return keyPair.getPublic().encode("hex", true);
-  }
+    static getVerify(receivedTx:ReceivedTx) : Failable<undefined, string> {
+        const {sender ,received, amount, signature} = receivedTx;
+        const data : [string, string , number] = [sender, received, amount];
+        const hash : string = SHA256(data.join("")).toString();
 
-  public getAccount(): string {
-    return Buffer.from(this.publicKey).slice(26).toString();
-  }
+        // 공개키로 서명 검증
+        const keyPair = ec.keyFromPublic(sender, "hex");
+        const isVerify = keyPair.verify(hash, signature);
+        if(!isVerify) return {isError : true, value : "서명 검증이 안됨"};
+        
+        return {isError : false, value : undefined}
+    }
+
+    public getAccount() : string{
+        return Buffer.from(this.publicKey).slice(26).toString();
+    }
 }
