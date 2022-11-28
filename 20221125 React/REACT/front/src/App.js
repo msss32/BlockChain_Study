@@ -1,11 +1,16 @@
 import React from "react";
-import { Counter } from "./reducer/counter/Counter";
+import Counter from "./components/Counter";
+import useWeb3 from "./hooks/useWeb3";
 import "./App.css";
 
 function App() {
+  const [web3, account] = useWeb3();
+
+  if (!account) return <h1>메타마스크 연결 해주세요</h1>;
   return (
     <div className="App">
-      <Counter />
+      <h2>계정 : {account}</h2>
+      <Counter web3={web3} account={account} />
     </div>
   );
 }
