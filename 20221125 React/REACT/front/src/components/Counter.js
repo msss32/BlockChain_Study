@@ -74,6 +74,7 @@ const Counter = ({ web3, account }) => {
         setCount(value.count);
       });
 
+      setCount(count);
       setDeployed(Deployed);
     })();
   }, []);
