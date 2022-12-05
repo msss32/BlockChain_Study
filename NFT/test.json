@@ -1,0 +1,11 @@
+{
+    "name": "Seok NFT",
+    "description": "Legendery Cookie",
+    "image": "https://gateway.pinata.cloud/ipfs/QmRZ4rNq94MMhVg8JwuNmXgWmReHK1rAVD7nLor5Qn52C5",
+    "attributes": [
+        {
+            "type": "card",
+            "value": 1
+        }
+    ]
+}
