@@ -16,3 +16,7 @@
 
 // constracts 폴더로 이동을 해서
 // remixd -s . --remix-ide https://remix.ethereum.org
+
+// 오픈 제플린 설치
+// ERC721 토큰 표준 사용하기 위해
+// npm i openzeppelin-solidity
