@@ -8,7 +8,7 @@ const Counter = ({ web3, account }) => {
 
   const increment = async () => {
     // 매개변수로 트랜잭션 계정이 필요
-    // 트랜잭션을 발생 시킬거.
+    // 트랜잭션을 발생 시킬거
     // 상태변수를 변경 send() 함수로
     // 상태 변수를 변경을 하고
     // const result = await deployed.methods.increment().send({ from: account });
